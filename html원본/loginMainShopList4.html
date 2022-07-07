@@ -1,0 +1,302 @@
+
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8">
+    <meta name="장바구니에 담기port" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, 그리고 Bootstrap 기여자들">
+    <meta name="generator" content="Hugo 0.88.1">
+    <title></title>
+    <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    .cart-list{
+    min-width: 992px;
+    margin-right: auto;
+    margin-left: auto;
+    }
+    .cart-listRow {
+    display: flex;
+    flex-wrap: wrap;
+    }
+    .cart-listCol{
+      width: 22%;
+      margin-left: 3%;
+      margin-top: 3%;
+    }
+    .cart-container {
+    display: flex;
+    flex-direction: column;
+    word-wrap: break-word;
+    background-color: #fff;
+    border: 1px solid rgba(0,0,0,.125);
+    border-radius: 0.50rem;
+  }  
+  .cart-body {
+    padding: 2rem;
+    text-align: center;
+  }
+  .cart-text{
+    border: 1px solid black;
+    padding: 10px;
+    border-radius: 0.50rem;
+  }
+  .cart-img{
+    border: 1px solid black;
+    border-radius: 0.50rem;
+  }
+  .cart-name{
+    border: 1px solid black;
+    border-radius: 0.50rem;
+    margin-bottom: 35px;
+  }
+  .btn-container{
+    padding-top:20px
+  }
+    @media (min-width:992px) {
+        .cart-list {
+            max-width: 960px;
+        }
+    }
+    @media (min-width:1200px) {
+        .cart-list {
+            max-width: 1140px;
+        }
+    }
+    @media (min-width:1400px) {
+        .cart-list{
+            max-width: 1320px;
+        }
+    }
+    .pic {
+    background: url("/20220624TeamProject/image/고라.jpg") no-repeat;
+    background-size: cover;
+    width: 100%;
+    height: 100%;
+    border: 1px solid black;
+    border-radius: 0.50rem;
+    }
+    .text {
+        background: gray;
+        opacity: 0;
+    }
+    .text p {
+        padding-top: 92.5%;
+    }
+    .pic:hover .text {
+        opacity: 0.6;
+        text-align: center;
+        color: #ffffff;
+    }
+    #cartMoreShowBtn{
+      display : flex; 
+      width : 200px; 
+      height : 120px;
+      margin: 40px auto auto auto; 
+      justify-content : center;
+    }
+    
+    </style>
+  </head>
+  <body>
+<main>
+    <div class="cart-list">
+      <div class="cart-listRow">
+        <div class="cart-listCol">
+          <div class="cart-container">
+            <div class="pic">
+                <div class="text">
+                  <p class="pic-bicHover">사진 크게보기</p>
+                </div>
+            </div>
+            <div class="cart-body">
+              <p class="cart-name">고라파덕</p>
+              <p class="cart-text">상품 가격</p>
+              <div class="btn-container">
+                <div class="btn-group">
+                  <input type="button" class="btn" id="cartGetList" value="장바구니에 담기">
+                  <input type="button" class="btn" id="cartShowList" value="상품 보기">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="cart-listCol">
+          <div class="cart-container">
+            <div class="pic">
+              <div class="text">
+                <p class="pic-bicHover">사진 크게보기</p>
+              </div>
+          </div>
+            <div class="cart-body">
+              <p class="cart-name">고라파덕</p>
+              <p class="cart-text">상품 가격</p>
+              <div class="btn-container">
+                <div class="btn-group">
+                  <button type="button" class="btn">장바구니에 담기</button>
+                  <button type="button" class="btn">상품 보기</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="cart-listCol">
+          <div class="cart-container">
+            <div class="pic">
+              <div class="text">
+                <p class="pic-bicHover">사진 크게보기</p>
+              </div>
+          </div>
+            <div class="cart-body">
+              <p class="cart-name">고라파덕</p>
+              <p class="cart-text">상품 가격</p>
+              <div class="btn-container">
+                <div class="btn-group">
+                  <button type="button" class="btn">장바구니에 담기</button>
+                  <button type="button" class="btn">상품 보기</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="cart-listCol">
+          <div class="cart-container">
+            <div class="pic">
+              <div class="text">
+                <p class="pic-bicHover">사진 크게보기</p>
+              </div>
+          </div>
+            <div class="cart-body">
+              <p class="cart-name">고라파덕</p>
+              <p class="cart-text">상품 가격</p>
+              <div class="btn-container">
+                <div class="btn-group">
+                  <button type="button" class="btn">장바구니에 담기</button>
+                  <button type="button" class="btn">상품 보기</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="cart-listCol">
+          <div class="cart-container">
+            <div class="pic">
+              <div class="text">
+                <p class="pic-bicHover">사진 크게보기</p>
+              </div>
+          </div>
+            <div class="cart-body">
+              <p class="cart-name">고라파덕</p>
+              <p class="cart-text">상품 가격</p>
+              <div class="btn-container">
+                <div class="btn-group">
+                  <button type="button" class="btn">장바구니에 담기</button>
+                  <button type="button" class="btn">상품 보기</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="cart-listCol">
+          <div class="cart-container">
+            <div class="pic">
+              <div class="text">
+                <p class="pic-bicHover">사진 크게보기</p>
+              </div>
+          </div>
+            <div class="cart-body">
+              <p class="cart-name">고라파덕</p>
+              <p class="cart-text">상품 가격</p>
+              <div class="btn-container">
+                <div class="btn-group">
+                  <button type="button" class="btn">장바구니에 담기</button>
+                  <button type="button" class="btn">상품 보기</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="cart-listCol">
+          <div class="cart-container">
+            <div class="pic">
+              <div class="text">
+                <p class="pic-bicHover">사진 크게보기</p>
+              </div>
+          </div>
+            <div class="cart-body">
+              <p class="cart-name">고라파덕</p>
+              <p class="cart-text">상품 가격</p>
+              <div class="btn-container">
+                <div class="btn-group">
+                  <button type="button" class="btn">장바구니에 담기</button>
+                  <button type="button" class="btn">상품 보기</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="cart-listCol">
+          <div class="cart-container">
+            <div class="pic">
+              <div class="text">
+                <p class="pic-bicHover">사진 크게보기</p>
+              </div>
+          </div>
+            <div class="cart-body">
+              <p class="cart-name">고라파덕</p>
+              <p class="cart-text">상품 가격</p>
+              <div class="btn-container">
+                <div class="btn-group">
+                  <button type="button" class="btn">장바구니에 담기</button>
+                  <button type="button" class="btn">상품 보기</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="cart-listCol">
+          <div class="cart-container">
+            <div class="pic">
+              <div class="text">
+                <p class="pic-bicHover">사진 크게보기</p>
+              </div>
+          </div>
+            <div class="cart-body">
+              <p class="cart-name">고라파덕</p>
+              <p class="cart-text">상품 가격</p>
+              <div class="btn-container">
+                <div class="btn-group">
+                  <button type="button" class="btn">장바구니에 담기</button>
+                  <button type="button" class="btn">상품 보기</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="cart-listCol">
+          <div class="cart-container">
+            <div class="pic">
+              <div class="text">
+                <p class="pic-bicHover">사진 크게보기</p>
+              </div>
+          </div>
+            <div class="cart-body">
+              <p class="cart-name">고라파덕</p>
+              <p class="cart-text">상품 가격</p>
+              <div class="btn-container">
+                <div class="btn-group">
+                  <button type="button" class="btn">장바구니에 담기</button>
+                  <button type="button" class="btn">상품 보기</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <input type="button" id="cartMoreShowBtn" value="더보기">
+    </div>
+    
+</main>
+
+  </body>
+</html>

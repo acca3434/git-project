@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+    </head>
+    <style>
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      #cartMoreShowBtn{
+      display : flex; 
+      width : 10.417vw; 
+      height : 6.25vw;
+      margin: 2.083vw auto auto auto; 
+      justify-content : center;
+      }
+      .cart-modal {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: none;
+      background-color: rgba(0, 0, 0, 0.4);
+      }
+      .cart-modal-body {
+      overflow: scroll;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 90%;
+      height: 93%;
+      padding: 2.083vw;
+      text-align: center;
+      background-color: rgb(255, 255, 255);
+      border-radius: 0.521vw;
+      box-shadow: 0 0.104vw 0.156vw 0 rgba(34, 36, 38, 0.15);
+      transform: translateX(-50%) translateY(-50%);
+      }
+      .cart-title{
+      vertical-align : bottom;
+      text-align:center;
+      background-color: rgba(42, 46, 49, 0.15);;
+      box-shadow: 0 0.104vw 0.156vw 0 rgba(34, 36, 38, 0.15);
+      height: 2.604vw;
+      }
+      .cart-btn-group{
+      margin-top: 1.042vw;
+      }
+      .cart-list{
+      min-width: 51.667vw;
+      margin-right: auto;
+      margin-left: auto;
+      }
+      .cart-listRow {
+      display: flex;
+      flex-wrap: wrap;
+      }
+      .cart-listCol{
+      width: 22%;
+      margin-left: 3%;
+      margin-top: 3%;
+      }
+      .cart-container {
+      display: flex;
+      flex-direction: column;
+      word-wrap: break-word;
+      background-color: #fff;
+      border: 0.052vw solid rgba(0,0,0,.125);
+      border-radius: 0.50rem;
+      }  
+      .cart-body {
+      padding: 2rem;
+      text-align: center;
+      }
+      .cart-text{
+      border: 0.052vw solid black;
+      padding: 0.521vw;
+      border-radius: 0.50rem;
+      }
+      .cart-img{
+      border: 0.052vw solid black;
+      border-radius: 0.50rem;
+      }
+      .cart-name{
+      border: 0.052vw solid black;
+      border-radius: 0.50rem;
+      margin-bottom: 1.823vw;
+      }
+      .btn-container{
+      padding-top:1.042vw
+      }
+      @media (min-width:51.667vw) {
+          .cart-list {
+              max-width: 50vw;
+          }
+      }
+      @media (min-width:62.5vw) {
+          .cart-list {
+              max-width: 59.375vw;
+          }
+      }
+      @media (min-width:72.917vw) {
+          .cart-list{
+              max-width: 68.75vw;
+          }
+      }
+      .text {
+      background: gray;
+      opacity: 0;
+      }
+      .text p {
+      padding-top: 92.5%;
+      }
+      .pic{
+      background-size: cover;
+      width: 100%;
+      height: 100%;
+      border: 0.052vw solid black;
+      border-radius: 0.50rem;
+      }
+      .pic:hover .text {
+      opacity: 0.6;
+      text-align: center;
+      color: #ffffff;
+      }
+      .btn-cart-list{
+      position: fixed;
+      transform: translateX(1800%) translateY(30%);
+      width: 5.208vw;
+      height: 2.604vw;
+      }
+      .cart-list-p-text{
+      font-size: 2vw;
+      display: inline;
+      }
+      .search-item{
+      width: 4.167vw;
+      height: 1.563vw;
+      margin-left: 0.26vw;
+      }
+      .search-Alignment{
+        position : fixed;
+      }
+      </style>
+    <body>
+        <div class="cart-modal-body">
+            <p class="cart-title">장바구니 리스트</p>
+            <div class="cart-modal-container">
+                <div class="cart-list" id="cart-Buy-list">
+                    <div class="cart-listRow" id="cart-Buy-list-row">
+                        <div class="cart-listCol" id="cartBuyListCol0">
+                            <div class="cart-container">
+                                <div class="pic" style="background-image: url(&quot;/image/f3.jpg&quot;);">
+                                    <div class="text">
+                                        <p class="pic-bicHover">사진 크게보기</p>
+                                    </div>
+                                </div>
+                                <div class="cart-body">
+                                    <p class="cart-name">바지 상하의 세트</p>
+                                    <p class="cart-text">10000원</p>
+                                    <div class="btn-container">
+                                        <div class="btn-group"><input type="button" value="삭제하기" class="btn" id="cartBuyBtnGetList0"><input type="button" value="자세한 상품 보기" class="btn">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="cart-listCol" id="cartBuyListCol1">
+                            <div class="cart-container">
+                                <div class="pic" style="background-image: url(&quot;/image/f2.jpg&quot;);">
+                                    <div class="text">
+                                        <p class="pic-bicHover">사진 크게보기</p>
+                                    </div>
+                                </div>
+                                <div class="cart-body">
+                                    <p class="cart-name">거지 바지 세트</p>
+                                    <p class="cart-text">12900원</p>
+                                    <div class="btn-container">
+                                        <div class="btn-group"><input type="button" value="삭제하기" class="btn" id="cartBuyBtnGetList1"><input type="button" value="자세한 상품 보기" class="btn">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="cart-list-sum">
+              <p class="cart-sum-price">총 합계금액 : 20000만원</p>
+            </div>
+            <div class="cart-btn-group">
+                <input type="button" value="주문하기" id="cartListAllBuy">
+                <input type="button" value="나가기" id="cartListOut">
+            </div>
+        </div>
+    </body>
+</html>

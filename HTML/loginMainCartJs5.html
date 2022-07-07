@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<link rel="stylesheet" href="/CSS/cartList.css">
+
+ <body>
+  <!-- 가격 검색기능 외 -->
+  <div class="search-Alignment">
+    <label for="priceSearch" class="">가격검색</label>
+    <input type="number" name="" id="firstPriceSearch" class="search-item"> ~
+    <input type="number" name="" id="secondPriceSearch" class="search-item">
+    <input type="button" value="검색" class="search-item" id="searchBtn">
+    <input type="button" value="인기상품순" class="search-item">
+    <input type="button" value="신상품순" class="search-item">
+    <input type="button" value="낮은가격순" class="search-item" id="RowSearchPrice">
+    <input type="button" value="높은가격순" class="search-item" id="highSearchPrice">
+    <input type="text"  class="input-search-item" id="searchText">
+    <input type="button" value="검색" class="search-item" id="searchTextBtn">
+  </div>
+  <div class="cart-list-text">
+  </div>
+<!-- 모달 태그 -->
+  <div class="cart-modal">
+      <div class="cart-modal-body">
+              <p class="cart-title">장바구니 리스트</p>
+    
+      <div class="cart-modal-container">
+          <div class="cart-list" id="cart-Buy-list">
+              <div class="cart-listRow" id="cart-Buy-list-row">
+                  
+              </div>
+          </div>
+      </div>
+          <div class="cart-btn-group">
+              <input type="button" value="주문하기" id="cartListAllBuy">
+              <input type="button" value="나가기" id="cartListOut">
+          </div>
+      </div>
+    </div>
+    <input type="button" class="btn-cart-list" value="장바구니">
+
+<!-- 쇼핑몰 처음에 보여줄 목록 -->
+<div id="cartAllList"></div>
+
+<!-- 가격 검색 총 기능 -->
+<div id="cartSearchList">
+  <div class="cart-list">
+      <div class="cart-listRow" id="cartSearchListContainer">
+
+      </div>
+  </div>
+</div>
+<script>
+
+//제이슨 연결
+function shopCap(){
+  return fetch("/json/shopCap.json")
+  .then((res)=> res.json())
+  .then((json)=> json.userShopInfor)
+  .catch((rej)=>{
+    console.log("실패")
+  })
+}
+
+//쇼핑목 목록 전체 배열 변수 선언
+let currentListCount = 0;
+let showListCount = 20;
+let cartListCol = new Array();
+let cartContainer = new Array();
+let cartPicture = new Array();
+let cartFirstText = new Array();
+let cartPicHover = new Array();
+let cartBody = new Array();
+let cartName = new Array();
+let cartSecondText = new Array();
+let cartBtnContainer = new Array();
+let cartBtnGroup = new Array();
+let cartBtnGetList = new Array();
+let cartBtnShowList = new Array();
+
+//장바구니에 담은 리스트 선언
+let cartBuyListRow = document.getElementById("cart-Buy-list-row");
+let currentBuyListCount = 0;
+//유저가 선택한 장바구니 배열선언(왜? 총합을 구할거기 때문에. 게다가 빼야할때도 있기 때문)
+let userListPrice = new Array();
+//유저의 돈 총합
+let userListPriceReal = 0;
+
+//장바구니 리스트
+let cartBuyListCol = new Array();
+let cartBuyContainer = new Array();
+let cartBuyPicture = new Array();
+let cartBuyFirstText = new Array();
+let cartBuyPicHover = new Array();
+let cartBuyBody = new Array();
+let cartBuyName = new Array();
+let cartBuySecondText = new Array();
+let cartBuyBtnContainer = new Array();
+let cartBuyBtnGroup = new Array();
+let cartBuyDeleteBtn = new Array();
+let cartBuyBtnShowList = new Array();
+let cartListPText = new Array();
+let cartListDeleteText = new Array();
+
+//가격검색 및 그 외에 쓰일 배열들
+let currentSearchListCount = 0;
+let showSearchListCount = 20;
+let cartSearchListCol = new Array();
+let cartSearchContainer = new Array();
+let cartSearchPicture = new Array();
+let cartSearchFirstText = new Array();
+let cartSearchPicHover = new Array();
+let cartSearchBody = new Array();
+let cartSearchName = new Array();
+let cartSearchSecondText = new Array();
+let cartSearchBtnContainer = new Array();
+let cartSearchBtnGroup = new Array();
+let cartSearchBtnGetList = new Array();
+let cartSearchBtnShowList = new Array();
+//정확한 가격검색을 위한 전역변수 선언
+let cartPriceList = new Array();
+
+//가격검색 더보기 기능을 추가하기위해 버튼 따로 생성
+let cartSearchMoreShowBtn = document.createElement("input");
+cartSearchMoreShowBtn.id = "cartSearchMoreShowBtn";
+cartSearchMoreShowBtn.setAttribute("type","button");
+cartSearchMoreShowBtn.setAttribute("value","더보기");
+
+//검색기능 버튼 눌렀을때 필요한 변수
+let firstPriceSearch = document.getElementById("firstPriceSearch").value;
+let secondPriceSearch = document.getElementById("secondPriceSearch").value;
+
+//장바구니 카운트
+let cartListResult = 0;
+let cartAllList = document.getElementById("cartAllList");
+
+//모달 변수
+let modal = document.querySelector('.cart-modal');
+let cartListOut = document.getElementById("cartListOut");
+let btnCartList = document.querySelector('.btn-cart-list');
+
+//첫 상품목록 반복이 필요없는 부모 태그 생성
+let cartList = document.createElement("div");
+cartList.classList.add("cart-list");
+//appendChild
+let cartListRow = document.createElement("div");
+cartListRow.classList.add("cart-listRow");
+let cartMoreShowBtn = document.createElement("input");
+cartMoreShowBtn.id = "cartMoreShowBtn";
+cartMoreShowBtn.setAttribute("type","button");
+cartMoreShowBtn.setAttribute("value","더보기");
+
+let cartListSum = document.createElement("div");
+cartListSum.classList.add("cart-list-sum");
+let cartSumPrice = document.createElement("p");
+cartSumPrice.classList.add("cart-sum-price");
+cartSumPrice.innerHTML = "총 합계금액"+userListPriceReal;
+
+//처음 리스트 보여줄 태그들을 생성
+function cartInput(userShopInfor){
+  currentSearchListCount = 0;
+  showSearchListCount = 20;
+  cartSearchListCol = new Array();
+  cartSearchContainer = new Array();
+  cartSearchPicture = new Array();
+  cartSearchFirstText = new Array();
+  cartSearchPicHover = new Array();
+  cartSearchBody = new Array();
+  cartSearchName = new Array();
+  cartSearchSecondText = new Array();
+  cartSearchBtnContainer = new Array();
+  cartSearchBtnGroup = new Array();
+  cartSearchBtnGetList = new Array();
+  cartSearchBtnShowList = new Array();
+
+  for (const key in userShopInfor) {
+  cartListCol[key] = document.createElement("div");
+  cartListCol[key].classList.add("cart-listCol");
+  //appendChild
+  cartContainer[key] = document.createElement("div");
+  cartContainer[key].classList.add("cart-container");
+  //appendChild
+  cartPicture[key] = document.createElement("div");
+  cartPicture[key].classList.add("pic");
+  cartPicture[key].style.backgroundImage = userShopInfor[key].img;
+  //appendChild
+  cartFirstText[key] = document.createElement("div");
+  cartFirstText[key].classList.add("text");
+  //appendChild
+  cartPicHover[key] = document.createElement("p");
+  cartPicHover[key].classList.add("pic-bicHover");
+  cartPicHover[key].innerHTML = "사진 크게보기";
+  //pic after
+  cartBody[key] = document.createElement("div");
+  cartBody[key].classList.add("cart-body");
+  //appendChild
+  cartName[key] = document.createElement("p");
+  cartName[key].classList.add("cart-name");
+  cartName[key].innerHTML = userShopInfor[key].name;
+  //appendChild
+  cartSecondText[key] = document.createElement("p");
+  cartSecondText[key].classList.add("cart-text");
+  cartSecondText[key].innerHTML = userShopInfor[key].price+"원";
+  
+  cartBtnContainer[key] = document.createElement("div");
+  cartBtnContainer[key].classList.add("btn-container");
+
+  cartBtnGroup[key] = document.createElement("div");
+  cartBtnGroup[key].classList.add("btn-group");
+
+  cartBtnGetList[key] = document.createElement("input");
+  cartBtnGetList[key].setAttribute("type","button");
+  cartBtnGetList[key].setAttribute("value","장바구니에 담기");
+  cartBtnGetList[key].classList.add("btn");
+  cartBtnGetList[key].id = "cartGetList"+[key];
+  cartBtnShowList[key] = document.createElement("input");
+  cartBtnShowList[key].setAttribute("type","button");
+  cartBtnShowList[key].setAttribute("value","상품 보기");
+  cartBtnShowList[key].classList.add("btn");
+  cartBtnShowList[key].id = "cartShowList"+[key];
+
+      //각각의 장바구니 버튼을 눌렀을때
+    cartBtnGetList[key].addEventListener("click",function(){ 
+      cartBuyListCol[cartListResult] = document.createElement("div");
+      cartBuyListCol[cartListResult].classList.add("cart-listCol");
+      cartBuyListCol[cartListResult].id = "cartBuyListCol"+[cartListResult];
+      //appendChild
+      cartBuyContainer[cartListResult] = document.createElement("div");
+      cartBuyContainer[cartListResult].classList.add("cart-container");
+      //appendChild
+      cartBuyPicture[cartListResult] = document.createElement("div");
+      cartBuyPicture[cartListResult].classList.add("pic");
+      cartBuyPicture[cartListResult].style.backgroundImage = userShopInfor[key].img;
+      //appendChild
+      cartBuyFirstText[cartListResult] = document.createElement("div");
+      cartBuyFirstText[cartListResult].classList.add("text");
+      //appendChild
+      cartBuyPicHover[cartListResult] = document.createElement("p");
+      cartBuyPicHover[cartListResult].classList.add("pic-bicHover");
+      cartBuyPicHover[cartListResult].innerHTML = "사진 크게보기";
+      //pic after
+      cartBuyBody[cartListResult] = document.createElement("div");
+      cartBuyBody[cartListResult].classList.add("cart-body");
+      //appendChild
+      cartBuyName[cartListResult] = document.createElement("p");
+      cartBuyName[cartListResult].classList.add("cart-name");
+      cartBuyName[cartListResult].innerHTML = userShopInfor[key].name;
+      //appendChild
+      cartBuySecondText[cartListResult] = document.createElement("p");
+      cartBuySecondText[cartListResult].classList.add("cart-text");
+      cartBuySecondText[cartListResult].innerHTML = userShopInfor[key].price+"원";
+      
+      cartBuyBtnContainer[cartListResult] = document.createElement("div");
+      cartBuyBtnContainer[cartListResult].classList.add("btn-container");
+
+      cartBuyBtnGroup[cartListResult] = document.createElement("div");
+      cartBuyBtnGroup[cartListResult].classList.add("btn-group");
+
+      cartBuyDeleteBtn[cartListResult] = document.createElement("input");
+      cartBuyDeleteBtn[cartListResult].setAttribute("type","button");
+      cartBuyDeleteBtn[cartListResult].setAttribute("value","삭제하기");
+      cartBuyDeleteBtn[cartListResult].classList.add("btn");
+      cartBuyDeleteBtn[cartListResult].id = "cartBuyDeleteBtn"+[cartListResult];
+      // cartBuyDeleteBtn[cartListResult].id = "cartGetList"+[key];
+
+      cartBuyBtnShowList[cartListResult] = document.createElement("input");
+      cartBuyBtnShowList[cartListResult].setAttribute("type","button");
+      cartBuyBtnShowList[cartListResult].setAttribute("value","자세한 상품 보기");
+      cartBuyBtnShowList[cartListResult].classList.add("btn");
+      // cartBuyBtnShowList[key].id = "cartShowList"+[key];
+      cartListPText[cartListResult] = document.createElement("p");
+      cartListPText[cartListResult].classList.add("cart-list-p-text");
+      cartListPText[cartListResult].innerHTML = userShopInfor[key].name+",";
+      cartListPText[cartListResult].id = "cartListPText"+[cartListResult];
+      
+      userListPrice[cartListResult] = userShopInfor[key].price;
+      console.log(userListPrice);
+      userListPriceReal = userListPrice.reduce((a,b)=> a+b);
+      document.querySelector(".cart-list-text").appendChild(cartListPText[cartListResult]);
+      //장바구니 index를 늘려줘서 그 다음 방으로 이동한다
+      cartListResult++;
+  })
+}
+//배열에 담긴 태그들과 속성들을 추가하는 함수
+}
+
+//가격검색때 쓰일것들
+function cartSearchInput(userShopInfor){
+  for (const key in userShopInfor) {
+  cartSearchListCol[key] = document.createElement("div");
+  cartSearchListCol[key].classList.add("cart-listCol");
+  //appendChild
+  cartSearchContainer[key] = document.createElement("div");
+  cartSearchContainer[key].classList.add("cart-container");
+  //appendChild
+  cartSearchPicture[key] = document.createElement("div");
+  cartSearchPicture[key].classList.add("pic");
+  cartSearchPicture[key].style.backgroundImage = userShopInfor[key].img;
+  //appendChild
+  cartSearchFirstText[key] = document.createElement("div");
+  cartSearchFirstText[key].classList.add("text");
+  //appendChild
+  cartSearchPicHover[key] = document.createElement("p");
+  cartSearchPicHover[key].classList.add("pic-bicHover");
+  cartSearchPicHover[key].innerHTML = "사진 크게보기";
+  //pic after
+  cartSearchBody[key] = document.createElement("div");
+  cartSearchBody[key].classList.add("cart-body");
+  //appendChild
+  cartSearchName[key] = document.createElement("p");
+  cartSearchName[key].classList.add("cart-name");
+  cartSearchName[key].innerHTML = userShopInfor[key].name;
+  //appendChild
+  cartSearchSecondText[key] = document.createElement("p");
+  cartSearchSecondText[key].classList.add("cart-text");
+  cartSearchSecondText[key].innerHTML = userShopInfor[key].price+"원";
+  
+  cartSearchBtnContainer[key] = document.createElement("div");
+  cartSearchBtnContainer[key].classList.add("btn-container");
+
+  cartSearchBtnGroup[key] = document.createElement("div");
+  cartSearchBtnGroup[key].classList.add("btn-group");
+
+  cartSearchBtnGetList[key] = document.createElement("input");
+  cartSearchBtnGetList[key].setAttribute("type","button");
+  cartSearchBtnGetList[key].setAttribute("value","장바구니에 담기");
+  cartSearchBtnGetList[key].classList.add("btn");
+  cartSearchBtnGetList[key].id = "cartSearchBtnGetList"+[key];
+  cartSearchBtnShowList[key] = document.createElement("input");
+  cartSearchBtnShowList[key].setAttribute("type","button");
+  cartSearchBtnShowList[key].setAttribute("value","상품 보기");
+  cartSearchBtnShowList[key].classList.add("btn");
+  cartSearchBtnShowList[key].id = "cartSearchBtnShowList"+[key];
+
+      //각각의 장바구니 버튼을 눌렀을때
+      cartSearchBtnGetList[key].addEventListener("click",function(){ 
+      cartBuyListCol[cartListResult] = document.createElement("div");
+      cartBuyListCol[cartListResult].classList.add("cart-listCol");
+      cartBuyListCol[cartListResult].id = "cartBuyListCol"+[cartListResult];
+      //appendChild
+      cartBuyContainer[cartListResult] = document.createElement("div");
+      cartBuyContainer[cartListResult].classList.add("cart-container");
+      //appendChild
+      cartBuyPicture[cartListResult] = document.createElement("div");
+      cartBuyPicture[cartListResult].classList.add("pic");
+      cartBuyPicture[cartListResult].style.backgroundImage = userShopInfor[key].img;
+      //appendChild
+      cartBuyFirstText[cartListResult] = document.createElement("div");
+      cartBuyFirstText[cartListResult].classList.add("text");
+      //appendChild
+      cartBuyPicHover[cartListResult] = document.createElement("p");
+      cartBuyPicHover[cartListResult].classList.add("pic-bicHover");
+      cartBuyPicHover[cartListResult].innerHTML = "사진 크게보기";
+      //pic after
+      cartBuyBody[cartListResult] = document.createElement("div");
+      cartBuyBody[cartListResult].classList.add("cart-body");
+      //appendChild
+      cartBuyName[cartListResult] = document.createElement("p");
+      cartBuyName[cartListResult].classList.add("cart-name");
+      cartBuyName[cartListResult].innerHTML = userShopInfor[key].name;
+      //appendChild
+      cartBuySecondText[cartListResult] = document.createElement("p");
+      cartBuySecondText[cartListResult].classList.add("cart-text");
+      cartBuySecondText[cartListResult].innerHTML = userShopInfor[key].price+"원";
+      
+      cartBuyBtnContainer[cartListResult] = document.createElement("div");
+      cartBuyBtnContainer[cartListResult].classList.add("btn-container");
+
+      cartBuyBtnGroup[cartListResult] = document.createElement("div");
+      cartBuyBtnGroup[cartListResult].classList.add("btn-group");
+
+      cartBuyDeleteBtn[cartListResult] = document.createElement("input");
+      cartBuyDeleteBtn[cartListResult].setAttribute("type","button");
+      cartBuyDeleteBtn[cartListResult].setAttribute("value","삭제하기");
+      cartBuyDeleteBtn[cartListResult].classList.add("btn");
+      cartBuyDeleteBtn[cartListResult].id = "cartBuyDeleteBtn"+[cartListResult];
+
+      cartBuyBtnShowList[cartListResult] = document.createElement("input");
+      cartBuyBtnShowList[cartListResult].setAttribute("type","button");
+      cartBuyBtnShowList[cartListResult].setAttribute("value","자세한 상품 보기");
+      cartBuyBtnShowList[cartListResult].classList.add("btn");
+
+      cartListPText[cartListResult] = document.createElement("p");
+      cartListPText[cartListResult].classList.add("cart-list-p-text");
+      cartListPText[cartListResult].innerHTML = userShopInfor[key].name+",";
+      cartListPText[cartListResult].id = "cartListPText"+[cartListResult];
+      
+      userListPrice[cartListResult] = userShopInfor[key].price;
+      userListPriceReal = userListPrice.reduce((a,b)=> a+b);
+      document.querySelector(".cart-list-text").appendChild(cartListPText[cartListResult]);
+      //장바구니 index를 늘려줘서 그 다음 방으로 이동한다
+      cartListResult++;
+  })
+}
+//배열에 담긴 태그들과 속성들을 추가하는 함수
+}
+
+//정확한 가격 검색할때 쓰이는거
+function cartSearchPriceInput(userShopInfor){
+for (const key in userShopInfor) {
+  cartSearchListCol[key] = document.createElement("div");
+  cartSearchListCol[key].classList.add("cart-listCol");
+  //appendChild
+  cartSearchContainer[key] = document.createElement("div");
+  cartSearchContainer[key].classList.add("cart-container");
+  //appendChild
+  cartSearchPicture[key] = document.createElement("div");
+  cartSearchPicture[key].classList.add("pic");
+  cartSearchPicture[key].style.backgroundImage = userShopInfor[key].img;
+  //appendChild
+  cartSearchFirstText[key] = document.createElement("div");
+  cartSearchFirstText[key].classList.add("text");
+  //appendChild
+  cartSearchPicHover[key] = document.createElement("p");
+  cartSearchPicHover[key].classList.add("pic-bicHover");
+  cartSearchPicHover[key].innerHTML = "사진 크게보기";
+  //pic after
+  cartSearchBody[key] = document.createElement("div");
+  cartSearchBody[key].classList.add("cart-body");
+  //appendChild
+  cartSearchName[key] = document.createElement("p");
+  cartSearchName[key].classList.add("cart-name");
+  cartSearchName[key].innerHTML = userShopInfor[key].name;
+  //appendChild
+  cartSearchSecondText[key] = document.createElement("p");
+  cartSearchSecondText[key].classList.add("cart-text");
+  cartSearchSecondText[key].innerHTML = userShopInfor[key].price
+
+  //가격검색하기 위해서 전체를 저장했다
+  cartPriceList[key] = userShopInfor[key].price;
+
+  cartSearchBtnContainer[key] = document.createElement("div");
+  cartSearchBtnContainer[key].classList.add("btn-container");
+
+  cartSearchBtnGroup[key] = document.createElement("div");
+  cartSearchBtnGroup[key].classList.add("btn-group");
+
+  cartSearchBtnGetList[key] = document.createElement("input");
+  cartSearchBtnGetList[key].setAttribute("type","button");
+  cartSearchBtnGetList[key].setAttribute("value","장바구니에 담기");
+  cartSearchBtnGetList[key].classList.add("btn");
+  cartSearchBtnGetList[key].id = "cartSearchGetList"+[key];
+  cartSearchBtnShowList[key] = document.createElement("input");
+  cartSearchBtnShowList[key].setAttribute("type","button");
+  cartSearchBtnShowList[key].setAttribute("value","상품 보기");
+  cartSearchBtnShowList[key].classList.add("btn");
+  cartSearchBtnShowList[key].id = "cartSearchShowList"+[key];
+
+      //각각의 장바구니 버튼을 눌렀을때
+      cartSearchBtnGetList[key].addEventListener("click",function(){ 
+      cartBuyListCol[cartListResult] = document.createElement("div");
+      cartBuyListCol[cartListResult].classList.add("cart-listCol");
+      cartBuyListCol[cartListResult].id = "cartBuyListCol"+[cartListResult];
+      //appendChild
+      cartBuyContainer[cartListResult] = document.createElement("div");
+      cartBuyContainer[cartListResult].classList.add("cart-container");
+      //appendChild
+      cartBuyPicture[cartListResult] = document.createElement("div");
+      cartBuyPicture[cartListResult].classList.add("pic");
+      cartBuyPicture[cartListResult].style.backgroundImage = cartSearchPicture[key].style.backgroundImage;
+      //appendChild
+      cartBuyFirstText[cartListResult] = document.createElement("div");
+      cartBuyFirstText[cartListResult].classList.add("text");
+      //appendChild
+      cartBuyPicHover[cartListResult] = document.createElement("p");
+      cartBuyPicHover[cartListResult].classList.add("pic-bicHover");
+      cartBuyPicHover[cartListResult].innerHTML = "사진 크게보기";
+      //pic after
+      cartBuyBody[cartListResult] = document.createElement("div");
+      cartBuyBody[cartListResult].classList.add("cart-body");
+      //appendChild
+      cartBuyName[cartListResult] = document.createElement("p");
+      cartBuyName[cartListResult].classList.add("cart-name");
+      cartBuyName[cartListResult].innerHTML = cartSearchName[key].innerHTML;
+      //appendChild
+      cartBuySecondText[cartListResult] = document.createElement("p");
+      cartBuySecondText[cartListResult].classList.add("cart-text");
+      cartBuySecondText[cartListResult].innerHTML = cartSearchSecondText[key].innerHTML;
+      cartBuyBtnContainer[cartListResult] = document.createElement("div");
+      cartBuyBtnContainer[cartListResult].classList.add("btn-container");
+
+      cartBuyBtnGroup[cartListResult] = document.createElement("div");
+      cartBuyBtnGroup[cartListResult].classList.add("btn-group");
+
+      cartBuyDeleteBtn[cartListResult] = document.createElement("input");
+      cartBuyDeleteBtn[cartListResult].setAttribute("type","button");
+      cartBuyDeleteBtn[cartListResult].setAttribute("value","삭제하기");
+      cartBuyDeleteBtn[cartListResult].classList.add("btn");
+      cartBuyDeleteBtn[cartListResult].id = "cartBuyDeleteBtn"+[cartListResult];
+      // cartBuyDeleteBtn[cartListResult].id = "cartGetList"+[key];
+
+      cartBuyBtnShowList[cartListResult] = document.createElement("input");
+      cartBuyBtnShowList[cartListResult].setAttribute("type","button");
+      cartBuyBtnShowList[cartListResult].setAttribute("value","자세한 상품 보기");
+      cartBuyBtnShowList[cartListResult].classList.add("btn");
+      // cartBuyBtnShowList[key].id = "cartShowList"+[key];
+      cartListPText[cartListResult] = document.createElement("p");
+      cartListPText[cartListResult].classList.add("cart-list-p-text");
+      cartListPText[cartListResult].innerHTML = cartSearchName[key].innerHTML+",";
+      cartListPText[cartListResult].id = "cartListPText"+[cartListResult];
+      
+      userListPrice[cartListResult] = Number(cartSearchSecondText[key].innerHTML);
+      userListPriceReal = userListPrice.reduce((a,b)=> a+b);
+      document.querySelector(".cart-list-text").appendChild(cartListPText[cartListResult]);
+      //장바구니 index를 늘려줘서 그 다음 방으로 이동한다
+      cartListResult++;
+  })
+}
+//배열에 담긴 태그들과 속성들을 추가하는 함수(정확한 가격검색같은경우 좀 까다로워서 따로 해줬다)
+
+}
+//속성과 값을 가진 태그들을 쏴주는거
+function cartListAppend(userShopInfor) {
+ document.getElementById("cartAllList").appendChild(cartList);
+ cartList.appendChild(cartListRow);
+  while (currentListCount < showListCount) {
+  let index = currentListCount;
+   cartListRow.appendChild(cartListCol[index]);
+   cartListCol[index].appendChild(cartContainer[index]);
+   cartContainer[index].appendChild(cartPicture[index]);
+   cartPicture[index].appendChild(cartFirstText[index]);
+   cartFirstText[index].appendChild(cartPicHover[index]);
+   cartPicture[index].after(cartBody[index]);
+   cartBody[index].appendChild(cartName[index]);
+   cartName[index].after(cartSecondText[index]);
+   cartSecondText[index].after(cartBtnContainer[index]);
+   cartBtnContainer[index].appendChild(cartBtnGroup[index]);
+   cartBtnGroup[index].appendChild(cartBtnGetList[index]);
+   cartBtnGetList[index].after(cartBtnShowList[index]);
+   currentListCount++;
+  }
+  cartListRow.after(cartMoreShowBtn);
+}
+
+//가격검색 태그들을 담은 배열들을 태그로 쏴준다
+function cartSearchListAppend(userShopInfor) {
+  //원래 정렬되지않는 태그들 전부 삭제해주고
+  while (document.getElementById("cartAllList").hasChildNodes()) {
+    document.getElementById("cartAllList").removeChild(document.getElementById("cartAllList").firstChild);
+  }
+  //처음 20개만 보여주기
+  while (currentSearchListCount < showSearchListCount) {
+  let index = currentSearchListCount;
+   document.getElementById("cartSearchListContainer").appendChild(cartSearchListCol[index]);
+   cartSearchListCol[index].appendChild(cartSearchContainer[index]);
+   cartSearchContainer[index].appendChild(cartSearchPicture[index]);
+   cartSearchPicture[index].appendChild(cartSearchFirstText[index]);
+   cartSearchFirstText[index].appendChild(cartSearchPicHover[index]);
+   cartSearchPicture[index].after(cartSearchBody[index]);
+   cartSearchBody[index].appendChild(cartSearchName[index]);
+   cartSearchName[index].after(cartSearchSecondText[index]);
+   cartSearchSecondText[index].after(cartSearchBtnContainer[index]);
+   cartSearchBtnContainer[index].appendChild(cartSearchBtnGroup[index]);
+   cartSearchBtnGroup[index].appendChild(cartSearchBtnGetList[index]);
+   cartSearchBtnGetList[index].after(cartSearchBtnShowList[index]);
+   currentSearchListCount++;
+  }
+  document.getElementById("cartSearchListContainer").after(cartSearchMoreShowBtn);
+}
+
+//정확한 가격검색을 위한 태그 쏴주기
+function cartSearchListPriceAppend(userShopInfor) {
+  while (document.getElementById("cartAllList").hasChildNodes()) {
+    document.getElementById("cartAllList").removeChild(document.getElementById("cartAllList").firstChild);
+  }
+  for (const key in userShopInfor) {
+      if(firstPriceSearch > cartPriceList[key]){
+        userShopInfor.splice(cartPriceList[key],1);
+      }
+      else if(secondPriceSearch < cartPriceList[key]){
+        userShopInfor.splice(cartPriceList[key],1);
+      }
+      else if(firstPriceSearch <= cartPriceList[key] && secondPriceSearch >= cartPriceList[key]){
+      document.getElementById("cartSearchListContainer").appendChild(cartSearchListCol[key]);
+      cartSearchListCol[key].appendChild(cartSearchContainer[key]);
+      cartSearchContainer[key].appendChild(cartSearchPicture[key]);
+      cartSearchPicture[key].appendChild(cartSearchFirstText[key]);
+      cartSearchFirstText[key].appendChild(cartSearchPicHover[key]);
+      cartSearchPicture[key].after(cartSearchBody[key]);
+      cartSearchBody[key].appendChild(cartSearchName[key]);
+      cartSearchName[key].after(cartSearchSecondText[key]);
+      cartSearchSecondText[key].after(cartSearchBtnContainer[key]);
+      cartSearchBtnContainer[key].appendChild(cartSearchBtnGroup[key]);
+      cartSearchBtnGroup[key].appendChild(cartSearchBtnGetList[key]);
+      cartSearchBtnGetList[key].after(cartSearchBtnShowList[key]);
+      currentSearchListCount++
+      console.log(currentSearchListCount)
+    }
+    else if(currentSearchListCount==showSearchListCount){
+      document.getElementById("cartSearchListContainer").after(cartSearchMoreShowBtn);
+      break;
+    }
+  }
+}
+  //장바구니 버튼을 눌렀을때
+btnCartList.addEventListener("click", function () {
+  cartAllList.style.display = "none";
+  btnCartList.style.display = "none";
+  modal.style.display = 'block';
+  document.getElementById("cartSearchList").style.display = "none";
+  
+  //장바구니 총 합계금액
+  cartSumPrice.innerHTML = "총 합계금액"+userListPriceReal;
+
+  //배열에 담긴 태그와 태그 속성값들을 쏴준다
+ while (currentBuyListCount < cartBuyListCol.length) {
+  let index = currentBuyListCount;
+   cartBuyListRow.appendChild(cartBuyListCol[index]);
+   cartBuyListCol[index].appendChild(cartBuyContainer[index]);
+   cartBuyContainer[index].appendChild(cartBuyPicture[index]);
+   cartBuyPicture[index].appendChild(cartBuyFirstText[index]);
+   cartBuyFirstText[index].appendChild(cartBuyPicHover[index]);
+   cartBuyPicture[index].after(cartBuyBody[index]);
+   cartBuyBody[index].appendChild(cartBuyName[index]);
+   cartBuyName[index].after(cartBuySecondText[index]);
+   cartBuySecondText[index].after(cartBuyBtnContainer[index]);
+   cartBuyBtnContainer[index].appendChild(cartBuyBtnGroup[index]);
+   cartBuyBtnGroup[index].appendChild(cartBuyDeleteBtn[index]);
+   cartBuyDeleteBtn[index].after(cartBuyBtnShowList[index]);
+   currentBuyListCount++;
+
+  //삭제하기 버튼을 눌렀을때
+    cartBuyDeleteBtn[index].addEventListener("click",function(){
+    userListPriceReal = userListPriceReal - userListPrice[index];
+    userListPrice.splice(index,1);
+    //장바구니 총 합계금액
+    cartSumPrice.innerHTML = "총 합계금액"+userListPriceReal;
+    cartBuyListRow.after(cartListSum)
+    cartListSum.appendChild(cartSumPrice);
+    document.getElementById("cart-Buy-list-row").removeChild(cartBuyListCol[index]);
+    cartListPText.splice(cartListPText[index],1);
+    document.querySelector(".cart-list-text").removeChild(document.getElementById("cartListPText"+[index]));
+   })
+}
+cartBuyListRow.after(cartListSum)
+cartListSum.appendChild(cartSumPrice);
+})
+
+//모달 안에 장바구니 주문을 취소했을때
+cartListOut.addEventListener("click", function () {
+  document.getElementById("cartSearchList").style.display = "block";
+  cartAllList.style.display = "block";
+  modal.style.display = 'none';
+  btnCartList.style.display = "block" 
+  })
+
+//초기 상품목록 더보기 버튼을 눌렀을때
+cartMoreShowBtn.addEventListener("click",function(){
+  showListCount += 20;
+  cartListAppend();
+  //80개가 다 됐을때 더보기 버튼 삭제
+if(currentListCount==cartListCol.length){
+  cartMoreShowBtn.remove();
+  }
+})
+
+//정확한 가격검색 후 더보기 버튼을 눌렀을때
+cartSearchMoreShowBtn.addEventListener("click",function(){
+  showSearchListCount += 20;
+  cartSearchListAppend();
+  //80개가 다 됐을때 더보기 버튼 삭제
+if(currentSearchListCount==cartSearchListCol.length){
+    cartSearchMoreShowBtn.remove();
+  }
+})
+
+//가격검색기능 버튼을 눌렀을때
+document.getElementById("searchBtn").addEventListener("click",function(){
+  shopCap().then((userShopInfor)=>{
+  while (document.getElementById("cartAllList").hasChildNodes()) {
+    document.getElementById("cartAllList").removeChild(document.getElementById("cartAllList").firstChild);
+  }
+  while (document.getElementById("cartSearchListContainer").hasChildNodes()) {
+    document.getElementById("cartSearchListContainer").removeChild(document.getElementById("cartSearchListContainer").firstChild);
+  }
+currentSearchListCount = 0;
+showSearchListCount = 20;
+firstPriceSearch = document.getElementById("firstPriceSearch").value;
+secondPriceSearch = document.getElementById("secondPriceSearch").value;
+
+
+  userShopInfor.sort((a,b)=>{
+        return a.price-b.price;
+    })
+    cartSearchPriceInput(userShopInfor);
+    cartSearchListPriceAppend(userShopInfor);
+  })
+})
+
+//낮은 가격순 눌렀을때
+document.getElementById("RowSearchPrice").addEventListener("click",function(){
+  while (document.getElementById("cartAllList").hasChildNodes()) {
+    document.getElementById("cartAllList").removeChild(document.getElementById("cartAllList").firstChild);
+  }
+  while (document.getElementById("cartSearchListContainer").hasChildNodes()) {
+    document.getElementById("cartSearchListContainer").removeChild(document.getElementById("cartSearchListContainer").firstChild);
+  }
+  currentSearchListCount = 0;
+  showSearchListCount = 20;
+    shopCap().then((userShopInfor)=>{
+      userShopInfor.sort(function(a, b){
+        return a.price - b.price;
+      });
+      cartSearchInput(userShopInfor)
+      cartSearchListAppend(userShopInfor)
+  })
+})
+
+//높은 가격순 눌렀을때
+document.getElementById("highSearchPrice").addEventListener("click",function(){
+  while (document.getElementById("cartAllList").hasChildNodes()) {
+    document.getElementById("cartAllList").removeChild(document.getElementById("cartAllList").firstChild);
+  }
+  while (document.getElementById("cartSearchListContainer").hasChildNodes()) {
+    document.getElementById("cartSearchListContainer").removeChild(document.getElementById("cartSearchListContainer").firstChild);
+  }
+  currentSearchListCount = 0;
+  showSearchListCount = 20;
+  shopCap().then((userShopInfor)=>{
+    userShopInfor.sort(function(a, b){
+      return b.price - a.price;
+    });
+    cartSearchInput(userShopInfor)
+    cartSearchListAppend(userShopInfor);
+  })
+})
+
+//검색을 위한 input값 넣어주기
+let searchText = document.getElementById("searchText").value;
+//검색에서 필터로 거른 내용들만 담을 변수
+let userShopInforSearch;
+let count = 0;
+//상품검색을 위한 태그 쏴주기
+document.getElementById("searchTextBtn").addEventListener("click",function(){
+  while (document.getElementById("cartAllList").hasChildNodes()) {
+    document.getElementById("cartAllList").removeChild(document.getElementById("cartAllList").firstChild);
+  }
+  while (document.getElementById("cartSearchListContainer").hasChildNodes()) {
+    document.getElementById("cartSearchListContainer").removeChild(document.getElementById("cartSearchListContainer").firstChild);
+  }
+  shopCap().then((userShopInfor)=>{
+    userShopInforSearch = userShopInfor;
+    searchText = document.getElementById("searchText").value;
+
+      if(searchText=="바지"){
+        searchText = "pants";
+      }
+      else if(searchText=="레깅스"){
+        searchText = "leggings";
+      }
+      else if(searchText=="신발"){
+        searchText = "shoes";
+      }
+      else if(searchText=="세트"){
+        searchText = "set";
+      }
+      else if(searchText=="가방"){
+        searchText = "bag";
+      }
+      userShopInforSearch = userShopInfor.filter(function(data) {
+        return data.classification===searchText;
+      });
+      cartSearchInput(userShopInforSearch);
+        for (const key in userShopInforSearch) {
+        document.getElementById("cartSearchListContainer").appendChild(cartSearchListCol[key]);
+        cartSearchListCol[key].appendChild(cartSearchContainer[key]);
+        cartSearchContainer[key].appendChild(cartSearchPicture[key]);
+        cartSearchPicture[key].appendChild(cartSearchFirstText[key]);
+        cartSearchFirstText[key].appendChild(cartSearchPicHover[key]);
+        cartSearchPicture[key].after(cartSearchBody[key]);
+        cartSearchBody[key].appendChild(cartSearchName[key]);
+        cartSearchName[key].after(cartSearchSecondText[key]);
+        cartSearchSecondText[key].after(cartSearchBtnContainer[key]);
+        cartSearchBtnContainer[key].appendChild(cartSearchBtnGroup[key]);
+        cartSearchBtnGroup[key].appendChild(cartSearchBtnGetList[key]);
+        cartSearchBtnGetList[key].after(cartSearchBtnShowList[key]);
+        currentSearchListCount++
+    }
+  })
+})
+
+//처음 시작 로직
+shopCap().then((userShopInfor)=>{
+  cartInput(userShopInfor);
+  cartListAppend(userShopInfor);
+})
+</script>
+</body>
+</html>

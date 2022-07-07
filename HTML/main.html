@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    *{
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    #slide-show{
+        width: 100%;
+        height: 52.083vw;
+        position: relative;
+        margin: 4.167vw auto;
+        /* border: 1px solid blueviolet; */
+        overflow: hidden;
+    }
+    /* 화면에 출력되는 슬라이드 */
+    .silde-warp{
+        width: 500vw;
+        display: flex;
+        position: absolute;
+        top: 5.208vw;
+        left: -100vw;
+        /* transition: 1s; */
+    }
+    /* 슬라이드 안에 사진 */
+    .img1{
+        width: 100vw;
+        height: 41.667vw;
+        /* border: 1px solid red; */
+        background-image: url("/image/고라.jpg");
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+    .img2{
+        width: 100vw;
+        height: 41.667vw;
+        /* border: 1px solid red; */
+        background-image: url("/image/이상.jpg");
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+    .img3{
+        width: 100vw;
+        height: 41.667vw;
+        /* border: 1px solid red; */
+        background-image: url("/image/파이.jpg");
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+    /* 슬라이드 박스 위에 버튼 */
+    .img-menu{
+        position: relative;
+        margin-top: -21.875vw;
+    }
+    .btn{
+        text-align: center;
+    }
+    /* 왼쪽 버튼 */
+    .prev{
+        padding-right: 1.563vw;
+        font-size: 1.042vw;
+        font-weight: bold;
+        cursor: pointer;
+    }
+    /* 오른쪽 버튼 */
+    .next{
+        padding-left: 1.563vw;
+        font-size: 1.042vw;
+        font-weight: bold;
+        cursor: pointer;
+    }
+    .number{
+        font-weight: bold;
+    }
+    /* 슬라이드 안에 text 박스 */
+    .container{
+        /* border: 1px solid red; */
+        background-color: white;
+        width: 20.833vw;
+        height: 5.208vw;
+        text-align: center;
+        margin: auto;
+        margin-top: 1.042vw;
+        font-family:'Nanum Gothic','ArialUnicodeMS',Arial,sans-serif;
+        position: relative;
+    }
+    .title{
+        font-size: 1.146vw;
+        margin: 5px;
+    }
+    .text{
+        font-size: 0.938vw;
+        margin: 5px;
+    }
+    /* 게이지바 */
+    .progress{
+        width: 0%;
+        height: 2px;
+        background-color: black;
+        position: relative;
+    }
+</style>
+<body>
+    <div id="slide-show">
+        <div class="silde-warp">
+            <div class="img1"></div>
+            <div class="img2"></div>
+            <div class="img3"></div>               
+        </div>
+    </div>
+    <div class="img-menu">
+        <p class="btn">
+            <span class="prev">&lang;</span>
+            <span class="number"></span>
+            <span class="next">&rang;</span>
+        </p>
+        <div class="container">
+            <div class="progress"></div>
+            <p class="title"></p>
+            <p class="text"></p>
+        </div>
+    </div>
+</body>
+<script src="/JS/main.js"></script>
+</html>

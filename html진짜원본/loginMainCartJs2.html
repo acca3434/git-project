@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <a href="/json/shopCap.json"></a>
+</body>
+<script>
+
+var test = [
+
+	{
+
+		"order":"10"
+
+		, "name":"aaa"
+
+		, "point":"555"
+
+	}
+
+	,{
+
+		"order":"4"
+
+		, "name":"bbb"
+
+		, "point":"222"
+
+	}
+
+	,{
+
+		"order":"8"
+
+		, "name":"ccc"
+
+		, "point":"999"
+
+	}
+
+];
+console.log("sort 전 : ", test);
+
+test.sort(function(a,b) {
+
+	return parseFloat(a.order) - parseFloat(b.order);
+
+});
+
+
+
+console.log("sort 후 : ", test);
+</script>
+</html>

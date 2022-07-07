@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="search-Alignment">
+        <label for="priceSearch" class="">가격검색</label>
+        <input type="number" name="" id="firstPriceSearch" class="search-item"> ~
+        <input type="number" name="" id="secondPriceSearch" class="search-item">
+        <input type="button" value="검색" class="search-item" id="searchBtn">
+        <input type="button" value="인기상품순" class="search-item">
+        <input type="button" value="신상품순" class="search-item">
+        <input type="button" value="낮은가격순" class="search-item">
+        <input type="button" value="높은가격순" class="search-item">
+      </div>
+</body>
+<script>
+    // 실제직업과 다릅니다.
+const friends = [
+  {
+    name: '양주진',
+    age: 32,
+    job: '코인러',
+    married: false,
+  },
+  {
+    name: '오영제',
+    age: 32,
+    job: '랩퍼',
+    married: false,
+  },
+  {
+    name: '서준형',
+    age: 32,
+    job: '2년차 유부남',
+    married: true,
+  }
+];
+
+// 3명의 나이를 더해봅니다.
+// 여기서 초기값 설정이 반드시 필요합니다.
+const ageSum = friends.reduce((accumulator, currentObject) => {
+  return accumulator + currentObject.age;
+}, 0);
+
+console.log('친구들 나이 합 ', ageSum);
+</script>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <input type="text" id="firstValue">
+  <input type="text" id="secondValue">
+  <input type="button" value="계산하기" id="calcul">
+</body>
+<script>
+ let arr = [
+  {
+    price : 1000
+  },
+  {
+    price : 2000
+  },
+  {
+    price : 3000
+  },
+  {
+    price : 20000
+  },
+  {
+    price : 30000
+  },
+  {
+    price : 40000
+  },
+  {
+    price : 45000
+  },
+  {
+    price : 5000
+  },
+  {
+    price : 50000
+  }
+]
+
+let firstValue = document.getElementById("firstValue").value;
+let secondValue = document.getElementById("secondValue").value;
+
+document.getElementById("calcul").addEventListener("click",function(){
+firstValue = document.getElementById("firstValue").value;
+secondValue = document.getElementById("secondValue").value;
+  for (const key in arr) {
+    if(arr[key].price >= firstValue && arr[key].price <= secondValue){
+      console.log(arr[key].price);
+    }
+  }
+})
+
+
+</script>
+</html>

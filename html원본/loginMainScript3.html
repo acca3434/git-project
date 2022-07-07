@@ -1,0 +1,248 @@
+
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8">
+    <meta name="장바구니에 담기port" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, 그리고 Bootstrap 기여자들">
+    <meta name="generator" content="Hugo 0.88.1">
+    <title></title>
+    <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    .cart-list{
+    min-width: 992px;
+    margin-right: auto;
+    margin-left: auto;
+    }
+    .cart-listRow {
+    display: flex;
+    flex-wrap: wrap;
+    }
+    .cart-listCol{
+      width: 22%;
+      margin-left: 3%;
+      margin-top: 3%;
+    }
+    .cart-container {
+    display: flex;
+    flex-direction: column;
+    word-wrap: break-word;
+    background-color: #fff;
+    border: 1px solid rgba(0,0,0,.125);
+    border-radius: 0.50rem;
+  }  
+  .cart-body {
+    padding: 2rem;
+    text-align: center;
+  }
+  .cart-text{
+    border: 1px solid black;
+    padding: 10px;
+    border-radius: 0.50rem;
+  }
+  .cart-img{
+    border: 1px solid black;
+    border-radius: 0.50rem;
+  }
+  .cart-name{
+    border: 1px solid black;
+    border-radius: 0.50rem;
+    margin-bottom: 35px;
+  }
+  .btn-container{
+    padding-top:20px
+  }
+    @media (min-width:992px) {
+        .cart-list {
+            max-width: 960px;
+        }
+    }
+    @media (min-width:1200px) {
+        .cart-list {
+            max-width: 1140px;
+        }
+    }
+    @media (min-width:1400px) {
+        .cart-list{
+            max-width: 1320px;
+        }
+    }
+    .pic {
+    background: url("/20220624TeamProject/image/고라.jpg") no-repeat;
+    background-size: cover;
+    width: 100%;
+    height: 100%;
+    border: 1px solid black;
+    border-radius: 0.50rem;
+    }
+    .text {
+        background: gray;
+        opacity: 0;
+    }
+    .text p {
+        padding-top: 92.5%;
+    }
+    .pic:hover .text {
+        opacity: 0.6;
+        text-align: center;
+        color: #ffffff;
+    }
+    #cartMoreShowBtn{
+      display : flex; 
+      width : 200px; 
+      height : 120px;
+      margin: 40px auto auto auto; 
+      justify-content : center;
+    }
+    </style>
+  </head>
+  <body>
+
+
+<main id="cartAllList"></main>
+<script>
+  let firstCount = 0;
+  let listCount = 20;
+  let listCountNum = 20;
+  let cartListCol = new Array(80);
+  let cartContainer = new Array(80);
+  let cartPicture = new Array(80);
+  let cartFirstText = new Array(80);
+  let cartPicHover = new Array(80);
+  let cartBody = new Array(80);
+  let cartName = new Array(80);
+  let cartSecondText = new Array(80);
+  let cartBtnContainer = new Array(80);
+  let cartBtnGroup = new Array(80);
+  let cartBtnGetList = new Array(80);
+  let cartBtnShowList = new Array(80);
+  
+  let cartList = document.createElement("div");
+  cartList.classList.add("cart-list");
+  //appendChild
+  let cartListRow = document.createElement("div");
+  cartListRow.classList.add("cart-listRow")
+  let cartMoreShowBtn = document.createElement("input");
+  cartMoreShowBtn.id = "cartMoreShowBtn";
+  cartMoreShowBtn.setAttribute("type","button");
+  cartMoreShowBtn.setAttribute("value","더보기");
+
+  //appendChild
+  for (let u = 0; u < cartListCol.length; u++) {
+
+    cartListCol[u] = document.createElement("div");
+    cartListCol[u].classList.add("cart-listCol");
+    //appendChild
+    cartContainer[u] = document.createElement("div");
+    cartContainer[u].classList.add("cart-container");
+    //appendChild
+    cartPicture[u] = document.createElement("div");
+    cartPicture[u].classList.add("pic");
+    //appendChild
+    cartFirstText[u] = document.createElement("div");
+    cartFirstText[u].classList.add("text");
+    //appendChild
+    cartPicHover[u] = document.createElement("p");
+    cartPicHover[u].classList.add("pic-bicHover");
+    cartPicHover[u].innerHTML = "사진 크게보기"
+    //pic after
+    cartBody[u] = document.createElement("div");
+    cartBody[u].classList.add("cart-body");
+    //appendChild
+    cartName[u] = document.createElement("p");
+    cartName[u].classList.add("cart-name");
+    cartName[u].innerHTML = "고라파덕"
+    //appendChild
+    cartSecondText[u] = document.createElement("p");
+    cartSecondText[u].classList.add("cart-text");
+    cartSecondText[u].innerHTML = "상품 가격"
+    
+    cartBtnContainer[u] = document.createElement("div");
+    cartBtnContainer[u].classList.add("btn-container");
+
+    cartBtnGroup[u] = document.createElement("div");
+    cartBtnGroup[u].classList.add("btn-group");
+
+    cartBtnGetList[u] = document.createElement("input");
+    cartBtnGetList[u].setAttribute("type","button");
+    cartBtnGetList[u].setAttribute("value","장바구니에 담기");
+    cartBtnGetList[u].classList.add("btn");
+    cartBtnGetList[u].id = "cartGetList";
+
+    cartBtnShowList[u] = document.createElement("input");
+    cartBtnShowList[u].setAttribute("type","button");
+    cartBtnShowList[u].setAttribute("value","상품 보기");
+    cartBtnShowList[u].classList.add("btn");
+    cartBtnShowList[u].id = "cartShowList";
+  }
+   document.getElementById("cartAllList").appendChild(cartList);
+   cartList.appendChild(cartListRow);
+   
+
+  if(firstCount === 0){
+    cartListCallFun();
+  }
+  function cartListCallFun() {
+      for (let p = 0; p < listCount; p++) {
+     cartListRow.appendChild(cartListCol[p]);
+     cartListCol[p].appendChild(cartContainer[p]);
+     cartContainer[p].appendChild(cartPicture[p]);
+     cartPicture[p].appendChild(cartFirstText[p]);
+     cartFirstText[p].appendChild(cartPicHover[p]);
+     cartPicture[p].after(cartBody[p]);
+     cartBody[p].appendChild(cartName[p]);
+     cartName[p].after(cartSecondText[p]);
+     cartSecondText[p].after(cartBtnContainer[p]);
+     cartBtnContainer[p].appendChild(cartBtnGroup[p]);
+     cartBtnGroup[p].appendChild(cartBtnGetList[p]);
+     cartBtnGetList[p].after(cartBtnShowList[p]);
+     firstCount = firstCount + 1;
+  }
+  listCount += listCount;
+  listCountNum = firstCount;
+  cartListRow.after(cartMoreShowBtn);
+}
+cartMoreShowBtn.addEventListener("click",function(){
+            //20 > 40
+            //40 > 60
+            //60 > 80
+  while (firstCount>listCount) {
+        cartListRow.appendChild(cartListCol[p]);
+        cartListCol[p].appendChild(cartContainer[p]);
+        cartContainer[p].appendChild(cartPicture[p]);
+        cartPicture[p].appendChild(cartFirstText[p]);
+        cartFirstText[p].appendChild(cartPicHover[p]);
+        cartPicture[p].after(cartBody[p]);
+        cartBody[p].appendChild(cartName[p]);
+        cartName[p].after(cartSecondText[p]);
+        cartSecondText[p].after(cartBtnContainer[p]);
+        cartBtnContainer[p].appendChild(cartBtnGroup[p]);
+        cartBtnGroup[p].appendChild(cartBtnGetList[p]);
+        cartBtnGetList[p].after(cartBtnShowList[p]);
+        firstCount = firstCount + 1;
+  }
+    cartListRow.after(cartMoreShowBtn);
+})
+
+
+  //  let cartAllArray = new Array(
+  //   cartList,
+  //   cartListRow,
+  //   cartMoreShowBtn,
+  //   cartListCol,
+  //   cartContainer,
+  //   cartPicture,
+  //   cartFirstText,
+  //   cartPicHover,
+  //   cartBody,
+  //   cartName,
+  //   cartSecondText,
+  //   cartBtnContainer,
+  //   cartBtnGroup,
+  //   cartBtnGetList,
+  //   cartBtnShowList
+  // ); 
+</script>
+  </body>
+</html>

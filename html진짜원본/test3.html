@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>slide button</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .slide-wrap {
+            position: relative;
+            display: flex;
+            margin: 10vw auto;
+            width: 90vw;
+            height: 30vh;
+            overflow: hidden;
+        }
+
+        [class ^="img"] {
+            position: absolute;
+            font-size: 100px;
+            font-weight: 900;
+            text-align: center;
+            width: 100%;
+            height: 100%;
+            transition: 2s;
+        }
+
+        .img1 {
+            background-color: rebeccapurple;
+        }
+
+        .img2 {
+            background-color: saddlebrown;
+        }
+
+        .img3 {
+            background-color: olive;
+        }
+
+        .img4 {
+            background-color: yellow;
+        }
+
+        .img5 {
+            background-color: brown;
+        }
+
+        [class $="btn"] {
+            position: absolute;
+            transform: translateY(-50%);
+            background-color: rgba(0, 0, 0, 0.452);
+            color: white;
+            top: 50%;
+            width: 8vw;
+            text-align: center;
+            border-radius: 30px;
+            z-index: 10;
+            margin: 0 5vw;
+        }
+
+        .next-btn {
+            right: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="slide-wrap">
+        <div class="img1">1</div>
+        <div class="img2">2</div>
+        <div class="img3">3</div>
+        <div class="img4">4</div>
+        <div class="img5">5</div>
+        <div class="prev-btn">이전</div>
+        <div class="next-btn">다음</div>
+    </div>
+</body>
+<script>
+    const prevBtn = document.querySelector('.prev-btn');//이전버튼
+    const nextBtn = document.querySelector('.next-btn');//이후버튼
+    const slideWrapTag = document.querySelector('.slide-wrap');//슬라이드 전체 부모
+    const imgTags = document.querySelectorAll('[class ^= "img"]');//img이름만 전부 따올려고
+    const imgTagsWidth = imgTags[0].getBoundingClientRect().width;
+    // ㅗ 이미지 태그의 width가 모두 동일하다는 것을 전제로 계산하기
+
+    let slideIdx = 0;
+    let imgTagsLeft = [];
+
+    // 이미지 태그들의 중심이 될 인덱스 설정하기
+    // (이미지 태그가 총 4개나 5개일 경우 중심에 놓을 이미지의 인덱스는 2으로 설정한다.)
+    const centerIdx = parseInt(imgTags.length / 2);
+
+    // 같은 위치에 모아져 있는 이미지 태그들을 width값을 활용해서 나란히 배치하는데
+    // 첫 번째의 이미지 태그를 가운데에 놓고 centerIdx번째의 인덱스까지는 오른쪽에, 나머지는 왼쪽에 배치한다.
+    let behindMoveCount = imgTags.length - (centerIdx + 1);
+    imgTags.forEach((el, idx, arr) => {
+        if (idx <= centerIdx) {
+            el.style.left = idx * imgTagsWidth + "px";
+            el.style.zIndex = (arr.length - 1) - idx;
+        }
+        else {el.style.left = -(idx - behindMoveCount) * imgTagsWidth + "px";
+        el.style.zIndex = (arr.length - 1) - idx;}
+        // 같은 위치에 모아져 있는 이미지들을 z-index상에서 오름차순으로 놓기
+    })
+
+    // 이미지 태그들의 left 값을 다시 구한 다음 최대값과 최소값의 인덱스를 return하는 함수
+    function minAndMaxIdx() {
+        imgTagsLeft = [];
+        imgTags.forEach((el) => {
+            imgTagsLeft.push(el.offsetLeft);
+        })
+
+        // imgTagsLeft.sort((a, b) => a - b);
+        console.log(imgTagsLeft);
+
+        let minLeftIdx = 0;
+        imgTagsLeft.reduce((min, val, idx) => {
+            minLeftIdx = idx
+            return min > val ? val:min ,console.log(idx+" "+val+" "+min);      
+        })
+        console.log("최소값 "+minLeftIdx);
+
+        let maxLeftIdx = 0;
+        imgTagsLeft.reduce((max, val, idx) => {
+            maxLeftIdx = idx
+            return max > val ? max:val ,console.log(idx+" "+val+" "+max);   
+        })
+
+        console.log("최대값 "+maxLeftIdx);
+
+        return [minLeftIdx, maxLeftIdx];
+    }
+
+    prevBtn.onclick = () => {
+        // ㅜ slideIdx가 첫 사진이면 마지막 사진으로 (0 -> imgTags.length - 1)
+        
+        const _minAndMaxIdx = minAndMaxIdx();
+        const maxLeftIdx = _minAndMaxIdx[1];
+
+        imgTags.forEach((el, idx) => {
+            if (idx != maxLeftIdx) {
+                el.style.left = imgTagsLeft[idx + 1] + "px";
+            }
+            else {
+                el.style.left = imgTagsLeft[0] + "px";
+            }
+        })
+
+        imgTags.forEach((el, idx, arr) => {
+            if (idx != slideIdx) {
+                el.style.zIndex++;
+            }
+            else {
+                el.style.zIndex = arr.length - 1;
+            }
+        })
+        if (slideIdx <= 0) slideIdx = (imgTags.length - 1);
+        else slideIdx--;
+    }
+    nextBtn.onclick = () => {
+        // slideIdx가 마지막 사진이면 첫 사진으로 (imgTags.length - 1 -> 0)
+    }
+</script>
+
+</html>

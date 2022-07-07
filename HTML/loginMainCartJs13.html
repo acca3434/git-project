@@ -1,0 +1,60 @@
+
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8">
+    <meta name="장바구니에 담기port" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, 그리고 Bootstrap 기여자들">
+    <meta name="generator" content="Hugo 0.88.1">
+    <title>우리 페이지입니당</title>
+<link rel="stylesheet" href="/CSS/cartShopCap.css">
+  </head>
+  <body>
+    <!-- 가격 검색기능 외 -->
+    <div class="cart-search-Alignment">
+      <label for="priceSearch" class="">가격검색</label>
+      <input type="number" id="cartFirstPriceSearch" class="cart-search-item"> ~
+      <input type="number" id="cartSecondPriceSearch" class="cart-search-item">
+      <input type="button" value="검색" class="cart-search-item" id="cartSearchBtn">
+      <input type="button" value="인기상품순" class="cart-search-item" id="cartHitList">
+      <input type="button" value="신상품순" class="cart-search-item" id="cartNewProduct">
+      <input type="button" value="낮은가격순" class="cart-search-item" id="cartRowSearchPrice">
+      <input type="button" value="높은가격순" class="cart-search-item" id="cartHighSearchPrice">
+      <input type="search"  class="cart-input-search-item" id="cartSearchText">
+      <input type="button" value="검색" class="cart-search-item" id="cartSearchTextBtn">
+      <div class="cart-search-text-body">최근검색어
+      </div>
+    </div>
+    <div class="cart-list-text">
+    </div>
+<!-- 모달 태그 -->
+    <div class="cart-modal">
+        <div class="cart-modal-body">
+                <p class="cart-title">장바구니 리스트</p>
+      
+        <div class="cart-modal-container">
+            <div class="cart-list" id="cart-Buy-list">
+                <div class="cart-listRow" id="cart-Buy-list-row">
+                    
+                </div>
+            </div>
+        </div>
+            <div class="cart-btn-group">
+                <input type="button" value="주문하기" id="cartListAllBuy">
+                <input type="button" value="나가기" id="cartListOut">
+            </div>
+        </div>
+      </div>
+      <input type="button" class="cart-btn-cart-list" value="장바구니">
+
+<!-- 배열의 초기값 -->
+<div id="cartAllList">
+  <div class="cart-list" id="cartListBody">
+    <div class="cart-listRow" id="cartSearchListContainer">
+    </div>
+</div>
+</div>
+<script src="/JS/cartShopCap.js"></script>
+  </body>
+</html>
