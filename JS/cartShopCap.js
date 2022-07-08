@@ -412,7 +412,7 @@ function shopCap(){
     cartSearchFirst = 0;
   })
   
-  document.getElementById("cartAllList").addEventListener("click",function(){
+  document.querySelector(".all-pages").addEventListener("click",function(){
     while (document.querySelector(".cart-search-text-body").hasChildNodes()) {
       document.querySelector(".cart-search-text-body").removeChild(document.querySelector(".cart-search-text-body").firstChild);
     }

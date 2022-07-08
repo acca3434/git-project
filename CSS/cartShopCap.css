@@ -1,4 +1,7 @@
 * { margin: 0; padding: 0; box-sizing: border-box; }
+p{
+    margin-bottom: 0px;
+}
 #cartMoreShowBtn{
 display : flex; 
 width : 10.417vw; 
@@ -145,7 +148,7 @@ margin-right: 1.042vw;
 .cart-search-text-body{
 position: absolute;
 top: 50%;
-left: 50%;
+left: 50.5%;
 transform: translate(31.5%, 10%);
 }
 .cart-search-child{
