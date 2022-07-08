@@ -411,8 +411,8 @@ function shopCap(){
     }
     cartSearchFirst = 0;
   })
-  
-  document.querySelector(".all-pages").addEventListener("click",function(){
+  //다른 공간을 눌렀을때 최근 검색어가 사라지게
+  document.getElementById("cartAllList").addEventListener("click",function(){
     while (document.querySelector(".cart-search-text-body").hasChildNodes()) {
       document.querySelector(".cart-search-text-body").removeChild(document.querySelector(".cart-search-text-body").firstChild);
     }

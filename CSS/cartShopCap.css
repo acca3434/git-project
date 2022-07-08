@@ -2,6 +2,11 @@
 p{
     margin-bottom: 0px;
 }
+.nav-container{
+    min-height: 20px;
+    height: 10vh;
+    width: 60vw;
+}
 #cartMoreShowBtn{
 display : flex; 
 width : 10.417vw; 
@@ -130,7 +135,7 @@ font-size: 2vw;
 display: inline;
 }
 .cart-search-item{
-width: 4.167vw;
+width: 4.5vw;
 height: 1.563vw;
 margin-left: 0.26vw;
 }
@@ -142,7 +147,7 @@ margin-top: 11.5px;
 position: relative;
 width: 20vw;
 height: 1.563vw;
-margin-left: 1.563vw;
+margin-left: 1.3vw;
 margin-right: 1.042vw;
 }
 .cart-search-text-body{
