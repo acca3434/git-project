@@ -161,6 +161,8 @@ body {
 
 .section2 {
   background-color: darkolivegreen;
+  overflow: scroll;
+  padding-bottom: 3.5%;
 }
 
 .section3 {
@@ -171,6 +173,8 @@ body {
 
 .section4 {
   background-color: darkblue;
+  overflow: scroll;
+  padding-bottom: 3.5%;
 }
 
 .all-pages {

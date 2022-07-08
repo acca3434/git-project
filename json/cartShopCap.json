@@ -365,360 +365,360 @@
             "price" : 12500,
             "img" : "url('/image/f40.jpg')",
             "popular" : "normal",
-            "index" : 40,
+            "index" : 0,
             "classification" : "bag",
-            "designName" : "jbh"       
+            "designName" : "jjw"       
         },
         {
             "name" : "통풍이 잘 안됄거같은 회색 바지",
             "price" : 12500,
             "img" : "url('/image/f41.jpg')",
             "popular" : "normal",
-            "index" : 41,
+            "index" : 1,
             "classification" : "pants",
-            "designName" : "jbh"
+            "designName" : "jjw"
         },
         {
             "name" : "이상한 포즈와 이상한 흰색 신발",
             "price" : 12400,
             "img" : "url('/image/f42.jpg')",
             "popular" : "normal",
-            "index" : 42,
+            "index" : 2,
             "classification" : "shoes",
-            "designName" : "jbh"
+            "designName" : "jjw"
         },
         {
             "name" : "줄이있는 밴딩바지",
             "price" : 12500,
             "img" : "url('/image/f43.jpg')",
             "popular" : "normal",
-            "index" : 43,
+            "index" : 3,
             "classification" : "pants",
-            "designName" : "jbh"
+            "designName" : "jjw"
         },
         {
             "name" : "줄이있는 밴딩바지 2",
             "price" : 15000,
             "img" : "url('/image/f44.jpg')",
             "popular" : "normal",
-            "index" : 44,
+            "index" : 4,
             "classification" : "pants",
-            "designName" : "jbh"
+            "designName" : "jjw"
         },
         {
             "name" : "검은색 통풍 큰 바지",
             "price" : 12500,
             "img" : "url('/image/f45.jpg')",
             "popular" : "normal",
-            "index" : 45,
+            "index" : 5,
             "classification" : "pants",
-            "designName" : "jbh"
+            "designName" : "jjw"
         },
         {
             "name" : "통풍이 진짜 잘됄거같은 누리끼리 바지",
             "price" : 11000,
             "img" : "url('/image/f46.jpg')",
             "popular" : "normal",
-            "index" : 46,
+            "index" : 6,
             "classification" : "pants",
-            "designName" : "jbh"
+            "designName" : "jjw"
         },
         {
             "name" : "구찌 신발과 바지 세트",
             "price" : 12500,
             "img" : "url('/image/f47.jpg')",
             "popular" : "normal",
-            "index" : 47,
+            "index" : 7,
             "classification" : "shoes",
-            "designName" : "jbh"
+            "designName" : "jjw"
         },
         {
             "name" : "검은색 바지",
             "price" : 15000,
             "img" : "url('/image/f48.jpg')",
             "popular" : "normal",
-            "index" : 48,
+            "index" : 8,
             "classification" : "pants",
-            "designName" : "jbh"
+            "designName" : "jjw"
         },
         {
             "name" : "여성 검은색 바지",
             "price" : 30000,
             "img" : "url('/image/f49.jpg')",
             "popular" : "normal",
-            "index" : 49,
+            "index" : 9,
             "classification" : "pants",
-            "designName" : "jbh"
+            "designName" : "jjw"
         },
         {
             "name" : "주름있는 브라운 바지",
             "price" : 15000,
             "img" : "url('/image/f50.jpg')",
             "popular" : "hit",
-            "index" : 50,
+            "index" : 10,
             "classification" : "pants",
-            "designName" : "jbh"
+            "designName" : "jjw"
         },
         {
             "name" : "초록색 통 큰 바지",
             "price" : 14000,
             "img" : "url('/image/f51.jpg')",
             "popular" : "normal",
-            "index" : 51,
+            "index" : 11,
             "classification" : "pants",
-            "designName" : "jbh"
+            "designName" : "jjw"
         },
         {
             "name" : "내 바지는 나팔바지",
             "price" : 15000,
             "img" : "url('/image/f52.jpg')",
             "popular" : "hit",
-            "index" : 52,
+            "index" : 12,
             "classification" : "pants",
-            "designName" : "jbh"
+            "designName" : "jjw"
         },
         {
             "name" : "킹스맨 정장 세트",
             "price" : 12500,
             "img" : "url('/image/f53.jpg')",
             "popular" : "normal",
-            "index" : 53,
+            "index" : 13,
             "classification" : "pants",
-            "designName" : "jbh"
+            "designName" : "jjw"
         },
         {
             "name" : "포즈잡는 모델 쌍둥이",
             "price" : 12400,
             "img" : "url('/image/f54.jpg')",
             "popular" : "normal",
-            "index" : 54,
+            "index" : 14,
             "classification" : "pants",
-            "designName" : "jbh"
+            "designName" : "jjw"
         },
         {
             "name" : "차렷자세하는 신기한 바지",
             "price" : 12400,
             "img" : "url('/image/f55.jpg')",
             "popular" : "normal",
-            "index" : 55,
+            "index" : 15,
             "classification" : "pants",
-            "designName" : "jbh"
+            "designName" : "jjw"
         },
         {
             "name" : "그런 포즈 잡지 마세요;",
             "price" : 12400,
             "img" : "url('/image/f56.jpg')",
             "popular" : "normal",
-            "index" : 56,
+            "index" : 16,
             "classification" : "pants",
-            "designName" : "jbh"
+            "designName" : "jjw"
         },
         {
             "name" : "흰색 생로랑 바지",
             "price" : 15000,
             "img" : "url('/image/f57.jpg')",
             "popular" : "normal",
-            "index" : 57,
+            "index" : 17,
             "classification" : "pants",
-            "designName" : "jbh"
+            "designName" : "jjw"
         },
         {
             "name" : "옷을 못입는 편의점 정석 옷세트",
             "price" : 30000,
             "img" : "url('/image/f58.jpg')",
             "popular" : "normal",
-            "index" : 58,
+            "index" : 18,
             "classification" : "pants",
-            "designName" : "jbh"
+            "designName" : "jjw"
         },
         {
             "name" : "한복인가?",
             "price" : 15000,
             "img" : "url('/image/f59.jpg')",
             "popular" : "normal",
-            "index" : 59,
+            "index" : 19,
             "classification" : "pants",
-            "designName" : "jbh"
+            "designName" : "jjw"
         },
         {
             "name" : "흰색 바지",
             "price" : 15000,
             "img" : "url('/image/f60.jpg')",
             "popular" : "normal",
-            "index" : 60,
+            "index" : 20,
             "classification" : "pants",
-            "designName" : "jbh"
+            "designName" : "jjw"
         },
         {
             "name" : "무신사 2020 커버 브라운 바지",
             "price" : 30000,
             "img" : "url('/image/f61.jpg')",
             "popular" : "normal",
-            "index" : 61,
+            "index" : 21,
             "classification" : "pants",
-            "designName" : "jbh"
+            "designName" : "jjw"
         },
         {
             "name" : "모델 이쁘당",
             "price" : 12400,
             "img" : "url('/image/f62.jpg')",
             "popular" : "normal",
-            "index" : 62,
+            "index" : 22,
             "classification" : "pants",
-            "designName" : "jbh"
+            "designName" : "jjw"
         },
         {
             "name" : "흰색 바지3",
             "price" : 30000,
             "img" : "url('/image/f63.jpg')",
             "popular" : "hit",
-            "index" : 63,
+            "index" : 23,
             "classification" : "pants",
-            "designName" : "jbh"
+            "designName" : "jjw"
         },
         {
             "name" : "주름이 좀 많은 바지",
             "price" : 14000,
             "img" : "url('/image/f64.jpg')",
             "popular" : "hit",
-            "index" : 64,
+            "index" : 24,
             "classification" : "pants",
-            "designName" : "jbh"
+            "designName" : "jjw"
         },
         {
             "name" : "주머니에 또 손넣은 이상한 바지",
             "price" : 12400,
             "img" : "url('/image/f65.jpg')",
             "popular" : "normal",
-            "index" : 65,
+            "index" : 25,
             "classification" : "pants",
-            "designName" : "jbh"
+            "designName" : "jjw"
         },
         {
             "name" : "뒤태가 아름다운 남성분의 바지",
             "price" : 15000,
             "img" : "url('/image/f66.jpg')",
             "popular" : "hit",
-            "index" : 66,
+            "index" : 26,
             "classification" : "pants",
-            "designName" : "jbh"
+            "designName" : "jjw"
         },
         {
             "name" : "이런 바지는 누가 입을까?",
             "price" : 12400,
             "img" : "url('/image/f67.jpg')",
             "popular" : "normal",
-            "index" : 67,
+            "index" : 27,
             "classification" : "pants",
-            "designName" : "jbh"
+            "designName" : "jjw"
         },
         {
             "name" : "깔끔하고 댄디함의 정석인 캐쥬얼 복장 세트",
             "price" : 15000,
             "img" : "url('/image/f68.jpg')",
             "popular" : "normal",
-            "index" : 68,
+            "index" : 28,
             "classification" : "set" 
-            ,"designName" : "jbh"
+            ,"designName" : "jjw"
         },
         {
             "name" : "어디 보고있는거니?",
             "price" : 1000,
             "img" : "url('/image/f69.jpg')",
             "popular" : "hit",
-            "index" : 69,
+            "index" : 29,
             "classification" : "set",
-            "designName" : "jbh"       
+            "designName" : "jjw"       
         },
         {
             "name" : "포즈를 어떻게 잡는지 모르는 사람",
             "price" : 15000,
             "img" : "url('/image/f70.jpg')",
             "popular" : "hit",
-            "index" : 70,
+            "index" : 30,
             "classification" : "pants",
-            "designName" : "jbh"
+            "designName" : "jjw"
         },
         {
             "name" : "그니까 대체 누가 입냐고 이런거를",
             "price" : 15000,
             "img" : "url('/image/f71.jpg')",
             "popular" : "hit",
-            "index" : 71,
+            "index" : 31,
             "classification" : "pants",
-            "designName" : "jbh"
+            "designName" : "jjw"
         },
         {
             "name" : "갈색 바지",
             "price" : 15000,
             "img" : "url('/image/f72.jpg')",
             "popular" : "hit",
-            "index" : 72,
+            "index" : 32,
             "classification" : "pants",
-            "designName" : "jbh"
+            "designName" : "jjw"
         },
         {
             "name" : "차렷자세 하거랑",
             "price" : 12400,
             "img" : "url('/image/f73.jpg')",
             "popular" : "normal",
-            "index" : 73,
+            "index" : 33,
             "classification" : "pants",
-            "designName" : "jbh"
+            "designName" : "jjw"
         },
         {
             "name" : "검은색 카고바지",
             "price" : 15000,
             "img" : "url('/image/f74.jpg')",
             "popular" : "normal",
-            "index" : 74,
+            "index" : 34,
             "classification" : "pants",
-            "designName" : "jbh"
+            "designName" : "jjw"
         },
         {
             "name" : "핑크색 나팔 반바지",
             "price" : 30000,
             "img" : "url('/image/f75.jpg')",
             "popular" : "hit",
-            "index" : 75,
+            "index" : 35,
             "classification" : "pants",
-            "designName" : "jbh"
+            "designName" : "jjw"
         },
         {
             "name" : "중국산 바지",
             "price" : 15000,
             "img" : "url('/image/f76.jpg')",
             "popular" : "hit",
-            "index" : 76,
+            "index" : 36,
             "classification" : "pants",
-            "designName" : "jbh"
+            "designName" : "jjw"
         },
         {
             "name" : "모델 이쁘당2",
             "price" : 15000,
             "img" : "url('/image/f77.jpg')",
             "popular" : "hit",
-            "index" : 77,
+            "index" : 37,
             "classification" : "set",
-            "designName" : "jbh"       
+            "designName" : "jjw"       
         },
         {
             "name" : "노답 삼형제2",
             "price" : 12400,
             "img" : "url('/image/f78.jpg')",
             "popular" : "hit",
-            "index" : 78,
+            "index" : 38,
             "classification" : "set",
-            "designName" : "jbh"       
+            "designName" : "jjw"       
         },
         {
             "name" : "노답 삼형제3",
             "price" : 10000,
             "img" : "url('/image/f79.jpg')",
             "popular" : "hit",
-            "index" : 79,
+            "index" : 39,
             "classification" : "set",
-            "designName" : "jbh"           
+            "designName" : "jjw"           
         }
     ]
 }
