@@ -2,11 +2,6 @@
 p{
     margin-bottom: 0px;
 }
-.nav-container{
-    min-height: 20px;
-    height: 10vh;
-    width: 60vw;
-}
 #cartMoreShowBtn{
 display : flex; 
 width : 10.417vw; 
